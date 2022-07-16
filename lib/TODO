@@ -1,0 +1,27 @@
+ToDo Custom Application
+    - Online Database (Firebase)
+    - Stores a checklist of things to do which you can add and remove
+    - Separate notes section which has notes, but not a checklist used for storing general notes and information to remember
+    - Requires Sign-In for first time going into app to acces your individual account. Second time onward you should be automatically logged in
+
+Steps
+    1. Create the 2 different tabs (sections) of notes and Todo  
+    2. Create the ToDo section. Add a floating action button to create a new task. 
+       The task should let you chose the date that it is due on, a description, and a title for the task. 
+       When you add it, it should appear on the front page of the ToDo section. When you overdue the task,
+       it should appear on an uncompleted section of the front ToDo page. When you tick off the task it goes into
+       the completed section. If you don't finish it and just delete it, it will disappear.           
+    3. Create the Notes section
+       The Notes section should be like the ToDo section, but where you can write a new note that isn't necessarily a task.
+       It could be something to remember and can be added through a floating action button. You can chose the title, date, and description,
+       when saved it will appear on the front page for that section and when deleted, it will be gone.
+    4. Create the Login page
+    5. Create database in which you can login to your separate account
+    6. Create the feature where you automatically login after loading your app
+    7. Connect database to the notes section and the todo section to each individual account
+    8. Finally polish up the design to make it actually look good and useable
+    9. If you want, you can add a settings page where you customise the look etc.
+    10. Add other sections if you want such as notifications for each task. 
+    11. This application has its data stored on a database online. This means the app won't work without having internet connection. 
+        Therefore, you could try to create an on-device storage solution which means you can use the app while it is offline. This will need
+        another kind of database but offline and local (on your device).
