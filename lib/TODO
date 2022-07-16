@@ -25,3 +25,6 @@ Steps
     11. This application has its data stored on a database online. This means the app won't work without having internet connection. 
         Therefore, you could try to create an on-device storage solution which means you can use the app while it is offline. This will need
         another kind of database but offline and local (on your device).
+
+NEXT STEP
+- FIX IT BRO

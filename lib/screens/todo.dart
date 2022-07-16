@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/providers/tasks.dart';
 import 'package:todo/sub_screens/newtask.dart';
 
 class ToDoScreen extends StatelessWidget {
@@ -10,16 +12,17 @@ class ToDoScreen extends StatelessWidget {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).push( // pushes to a new page where you can add a task
+            Navigator.of(context).push(
+              // pushes to a new page where you can add a task
               MaterialPageRoute(builder: (context) => const NewTaskScreen()),
             );
           },
           child: const Icon(Icons.add),
         ),
-        body: Column( // This is where the new tasks should be dosplayed
-          children: [
-
-          ],
+        body: Consumer<TaskProvider>(
+          builder: (context, task, child) {
+            return Text(task.totalTasks.toString());
+          },
         ),
       ),
     );
