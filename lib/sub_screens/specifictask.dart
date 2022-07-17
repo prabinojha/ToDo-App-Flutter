@@ -36,9 +36,11 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
     final TaskProvider taskInfo;
+    final Task specificTask;
     taskInfo = Provider.of<TaskProvider>(context, listen: false);
+    specificTask = taskInfo.findById(id);
+    print(specificTask.description);
 
     return SafeArea(
       child: Scaffold(
@@ -69,7 +71,7 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                         }
                       },
                       decoration: InputDecoration(
-                        hintText: 'Title',
+                        hintText: specificTask.title,
                         contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -104,7 +106,7 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                         setState(() {});
                       },
                       decoration: InputDecoration(
-                        hintText: 'Description',
+                        hintText: specificTask.description,
                         contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -133,11 +135,9 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                       controller: dateInput,
                       //editing controller of this TextField
                       decoration: const InputDecoration(
-                        icon: Icon(Icons.calendar_today), //icon of text field
-                        labelText: "Due Date",
-                      ),
+                          icon: Icon(Icons.calendar_today), //icon of text field
+                          labelText: 'Due Date'),
                       readOnly: true,
-                      //set it true, so that user will not able to edit text
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
@@ -152,52 +152,50 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                             dateInput.text =
                                 formattedDate; //set output date to TextField value.
                           });
-                        } else {
-                          setState(() {
-                            dateInput.text = 'No Date';
-                          });
-                        }
+                        } else {}
                       },
                     ),
                   ),
                   const SizedBox(height: 20),
                   Button(
                       onPressed: () {
-                        if (newDescriptionController.text.isEmpty ||
-                            newTitleController.text.isEmpty ||
-                            dateInput.text.isEmpty) {
-                          showDialog(
-                            context: context,
-                            builder: (_) => const AlertDialog(
-                              title: Text('At least provide some information!'),
-                            ),
-                          );
-                        } else {
-                          Task newTask = Task(
-                            description: newDescriptionController.text,
-                            title: newTitleController.text,
-                            duedate: dateInput.text,
-                            id: DateTime.now().toString(),
-                          );
-                          Provider.of<TaskProvider>(context, listen: false)
-                              .add(newTask);
-                          newTitleController.clear();
-                          newDescriptionController.clear();
-                          dateInput.clear();
-                          Navigator.pop(context);
-                        }
+                        // if (newDescriptionController.text.isEmpty ||
+                        //     newTitleController.text.isEmpty ||
+                        //     dateInput.text.isEmpty) {
+                        //   showDialog(
+                        //     context: context,
+                        //     builder: (_) => const AlertDialog(
+                        //       title: Text('At least provide some information!'),
+                        //     ),
+                        //   );
+                        // } else {
+                        //   Task newTask = Task(
+                        //     description: newDescriptionController.text,
+                        //     title: newTitleController.text,
+                        //     duedate: dateInput.text,
+                        //     id: DateTime.now().toString(),
+                        //   );
+                        //   Provider.of<TaskProvider>(context, listen: false)
+                        //       .add(newTask);
+                        //   newTitleController.clear();
+                        //   newDescriptionController.clear();
+                        //   dateInput.clear();
+                        //   Navigator.pop(context);
+                        // }
                       },
                       color: const Color.fromRGBO(114, 76, 249, 1),
                       title: 'Save'),
                   Button(
                     color: const Color.fromRGBO(248, 70, 76, 1),
                     onPressed: () {
+                      Provider.of<TaskProvider>(context, listen: false)
+                          .removeTask(specificTask);
                       newTitleController.clear();
                       newDescriptionController.clear();
                       dateInput.clear();
                       Navigator.pop(context);
                     },
-                    title: 'Cancel',
+                    title: 'Delete',
                   ),
                 ],
               ),

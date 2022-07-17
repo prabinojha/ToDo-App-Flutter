@@ -46,16 +46,17 @@ class TaskProvider extends ChangeNotifier {
     return [..._tasks];
   }
 
-  /// Adds [task] to list of tasks. This and [removeAll] are the only ways to modify the
-  /// _tasks list from the outside.
   void add(Task newtask) {
     _tasks.add(newtask);
-    // This call tells the widgets that are listening to this model to rebuild.
     notifyListeners();
   }
 
   void removeTask(Task task) {
     _tasks.remove(task);
     notifyListeners();
+  }
+
+  Task findById(String id) {
+    return _tasks.firstWhere((task) => task.id == id);
   }
 }
