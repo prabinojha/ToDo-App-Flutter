@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo/sub_screens/newtask.dart';
+import 'package:todo/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/providers/tasks.dart';
-import 'package:todo/widgets/button.dart';
 
-class NewTaskScreen extends StatefulWidget {
-  const NewTaskScreen({Key? key}) : super(key: key);
+class SpecificTaskScreen extends StatefulWidget {
+  String taskID;
+  SpecificTaskScreen(this.taskID, {Key? key}) : super(key: key);
 
   @override
-  State<NewTaskScreen> createState() => _NewTaskScreenState();
+  State<SpecificTaskScreen> createState() => _SpecificTaskScreenState();
 }
 
-class _NewTaskScreenState extends State<NewTaskScreen> {
+class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController newTitleController = TextEditingController();
   final TextEditingController newDescriptionController =
       TextEditingController();
+  // ignore: prefer_typing_uninitialized_variables
+  late final id;
 
   TextEditingController dateInput = TextEditingController();
 
   @override
   void initState() {
+    id = widget.taskID;
     dateInput.text = ""; //set the initial value of text field
+    newTitleController.text = "";
+    newDescriptionController.text =
+        ""; // FILL THESE UP WITH THE VALUES FROM YOUR PROVIDRER
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    final TaskProvider taskInfo;
+    taskInfo = Provider.of<TaskProvider>(context, listen: false);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add a new task'),
+          title: const Text('Edit Task'),
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -165,7 +178,6 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                             title: newTitleController.text,
                             duedate: dateInput.text,
                             id: DateTime.now().toString(),
-                            isComplete: false,
                           );
                           Provider.of<TaskProvider>(context, listen: false)
                               .add(newTask);

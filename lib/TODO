@@ -27,4 +27,4 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- Be able to edit the added task and sync those changes
+- Get access to the specific task through its id or some other method to be able to change its values when user wants to edit

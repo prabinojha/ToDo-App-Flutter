@@ -5,14 +5,15 @@ class Task {
   String title;
   String description;
   String duedate;
-  String? id;
+  String id;
   bool? isComplete;
 
   Task({
-    this.id,
+    required this.id,
     required this.title,
     required this.description,
     required this.duedate,
+    this.isComplete,
   });
 
   // USE THIS STRUCTURE LATER FOR SENDING DATA TO THE SERVER
