@@ -27,4 +27,4 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- Fix the display of the provider information in the tasks home page (todo page) through the consumer
+- Be able to edit the added task and sync those changes

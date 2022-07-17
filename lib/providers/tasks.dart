@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:collection';
 
 class Task {
-  String? title;
-  String? description;
-  String? duedate;
+  String title;
+  String description;
+  String duedate;
+  String? id;
   bool? isComplete;
 
   Task({
+    this.id,
     required this.title,
     required this.description,
     required this.duedate,
@@ -39,15 +41,20 @@ class TaskProvider extends ChangeNotifier {
   /// Internal, private state of the cart.
   final List<Task> _tasks = [];
 
-  UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
-
-  int get totalTasks => tasks.length;
+  List<Task> get tasks {
+    return [..._tasks];
+  }
 
   /// Adds [task] to list of tasks. This and [removeAll] are the only ways to modify the
   /// _tasks list from the outside.
   void add(Task newtask) {
     _tasks.add(newtask);
     // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
+  void removeTask(Task task) {
+    _tasks.remove(task);
     notifyListeners();
   }
 }

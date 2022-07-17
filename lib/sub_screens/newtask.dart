@@ -149,30 +149,43 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   ),
                   const SizedBox(height: 20),
                   Button(
-                      onPressed: () async {
-                        Task newTask = Task(
-                          description: newDescriptionController.text,
-                          title: newTitleController.text,
-                          duedate: dateInput.text,
-                        );
-                        Provider.of<TaskProvider>(context, listen: false)
-                            .add(newTask);
-                        newTitleController.clear();
-                        newDescriptionController.clear();
-                        dateInput.clear();
-                        Navigator.pop(context);
+                      onPressed: () {
+                        if (newDescriptionController.text.isEmpty ||
+                            newTitleController.text.isEmpty ||
+                            dateInput.text.isEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (_) => const AlertDialog(
+                              title: Text('At least provide some information!'),
+                            ),
+                          );
+                        } else {
+                          Task newTask = Task(
+                            description: newDescriptionController.text,
+                            title: newTitleController.text,
+                            duedate: dateInput.text,
+                            id: DateTime.now().toString(),
+                          );
+                          Provider.of<TaskProvider>(context, listen: false)
+                              .add(newTask);
+                          newTitleController.clear();
+                          newDescriptionController.clear();
+                          dateInput.clear();
+                          Navigator.pop(context);
+                        }
                       },
                       color: const Color.fromRGBO(114, 76, 249, 1),
                       title: 'Save'),
                   Button(
-                      color: const Color.fromRGBO(248, 70, 76, 1),
-                      onPressed: () {
-                        newTitleController.clear();
-                        newDescriptionController.clear();
-                        dateInput.clear();
-                        Navigator.pop(context);
-                      },
-                      title: 'Cancel'),
+                    color: const Color.fromRGBO(248, 70, 76, 1),
+                    onPressed: () {
+                      newTitleController.clear();
+                      newDescriptionController.clear();
+                      dateInput.clear();
+                      Navigator.pop(context);
+                    },
+                    title: 'Cancel',
+                  ),
                 ],
               ),
             ),
