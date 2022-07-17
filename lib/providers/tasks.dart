@@ -46,6 +46,10 @@ class TaskProvider extends ChangeNotifier {
     return [..._tasks];
   }
 
+  Task findById(String id) {
+    return _tasks.firstWhere((task) => task.id == id);
+  }
+
   void add(Task newtask) {
     _tasks.add(newtask);
     notifyListeners();
@@ -56,7 +60,11 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Task findById(String id) {
-    return _tasks.firstWhere((task) => task.id == id);
+  void updateTask(taskId, newTitle, newDescription, newDueDate) {
+    final taskIndex = _tasks.indexWhere((task) => task.id == taskId);
+    _tasks[taskIndex].title = newTitle;
+    _tasks[taskIndex].description = newDescription;
+    _tasks[taskIndex].duedate = newDueDate;
+    notifyListeners();
   }
 }

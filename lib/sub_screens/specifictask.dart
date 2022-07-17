@@ -15,9 +15,8 @@ class SpecificTaskScreen extends StatefulWidget {
 
 class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController newTitleController = TextEditingController();
-  final TextEditingController newDescriptionController =
-      TextEditingController();
+  TextEditingController newTitleController = TextEditingController();
+  TextEditingController newDescriptionController = TextEditingController();
   // ignore: prefer_typing_uninitialized_variables
   late final id;
 
@@ -41,6 +40,10 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
     taskInfo = Provider.of<TaskProvider>(context, listen: false);
     specificTask = taskInfo.findById(id);
     print(specificTask.description);
+
+    newTitleController.text = specificTask.title;
+    newDescriptionController.text = specificTask.description;
+    dateInput.text = specificTask.duedate;
 
     return SafeArea(
       child: Scaffold(
@@ -159,29 +162,14 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                   const SizedBox(height: 20),
                   Button(
                       onPressed: () {
-                        // if (newDescriptionController.text.isEmpty ||
-                        //     newTitleController.text.isEmpty ||
-                        //     dateInput.text.isEmpty) {
-                        //   showDialog(
-                        //     context: context,
-                        //     builder: (_) => const AlertDialog(
-                        //       title: Text('At least provide some information!'),
-                        //     ),
-                        //   );
-                        // } else {
-                        //   Task newTask = Task(
-                        //     description: newDescriptionController.text,
-                        //     title: newTitleController.text,
-                        //     duedate: dateInput.text,
-                        //     id: DateTime.now().toString(),
-                        //   );
-                        //   Provider.of<TaskProvider>(context, listen: false)
-                        //       .add(newTask);
-                        //   newTitleController.clear();
-                        //   newDescriptionController.clear();
-                        //   dateInput.clear();
-                        //   Navigator.pop(context);
-                        // }
+                        Provider.of<TaskProvider>(context, listen: false)
+                            .updateTask(
+                          specificTask.id,
+                          newTitleController.text,
+                          newDescriptionController.text,
+                          dateInput.text,
+                        );
+                        Navigator.of(context).pop();
                       },
                       color: const Color.fromRGBO(114, 76, 249, 1),
                       title: 'Save'),
