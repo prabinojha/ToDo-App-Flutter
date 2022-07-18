@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:todo/sub_screens/newtask.dart';
 import 'package:todo/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/providers/tasks.dart';
 
+// ignore: must_be_immutable
 class SpecificTaskScreen extends StatefulWidget {
   String taskID;
   SpecificTaskScreen(this.taskID, {Key? key}) : super(key: key);
@@ -25,10 +25,9 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
   @override
   void initState() {
     id = widget.taskID;
-    dateInput.text = ""; //set the initial value of text field
+    dateInput.text = "";
     newTitleController.text = "";
-    newDescriptionController.text =
-        ""; // FILL THESE UP WITH THE VALUES FROM YOUR PROVIDRER
+    newDescriptionController.text = "";
 
     super.initState();
   }
@@ -39,11 +38,10 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
     final Task specificTask;
     taskInfo = Provider.of<TaskProvider>(context, listen: false);
     specificTask = taskInfo.findById(id);
-    print(specificTask.description);
 
     newTitleController.text = specificTask.title;
     newDescriptionController.text = specificTask.description;
-    dateInput.text = specificTask.duedate;
+    dateInput.value = TextEditingValue(text: specificTask.duedate);
 
     return SafeArea(
       child: Scaffold(
@@ -65,14 +63,6 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                       cursorColor: Colors.grey,
                       controller: newTitleController,
                       keyboardType: TextInputType.text,
-                      onSaved: (value) {
-                        setState(() {});
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          value = 'Unamed Task';
-                        }
-                      },
                       decoration: InputDecoration(
                         hintText: specificTask.title,
                         contentPadding: const EdgeInsets.all(15),
@@ -105,9 +95,6 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                       cursorColor: Colors.grey,
                       controller: newDescriptionController,
                       keyboardType: TextInputType.multiline,
-                      onSaved: (value) {
-                        setState(() {});
-                      },
                       decoration: InputDecoration(
                         hintText: specificTask.description,
                         contentPadding: const EdgeInsets.all(15),
@@ -143,19 +130,19 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                       readOnly: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2100));
-
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2100),
+                        );
                         if (pickedDate != null) {
                           String formattedDate =
                               DateFormat('dd-MM-yyyy').format(pickedDate);
-                          setState(() {
-                            dateInput.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {}
+
+                          dateInput.text = formattedDate;
+                        } else {
+                          dateInput.text = 'No Date';
+                        }
                       },
                     ),
                   ),

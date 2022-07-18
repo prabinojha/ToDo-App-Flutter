@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/providers/tasks.dart';
 import 'package:todo/sub_screens/newtask.dart';
+import 'package:todo/widgets/button.dart';
 import '../sub_screens/specifictask.dart';
 
 class ToDoScreen extends StatelessWidget {
@@ -31,7 +32,49 @@ class ToDoScreen extends StatelessWidget {
                 itemBuilder: (context, i) => Consumer<TaskProvider>(
                   builder: ((context, value, child) => ListTile(
                         title: Text(tasks[i].title),
-                        trailing: Text(tasks[i].duedate.toString()),
+                        subtitle: Text(tasks[i].duedate.toString()),
+                        trailing: IconButton(
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                content: const Text(
+                                  'Are you sure you want to delete this task?',
+                                ),
+                                actions: [
+                                  Button(
+                                    onPressed: () {
+                                      tasks[i].isComplete = true;
+                                      Provider.of<TaskProvider>(context,
+                                              listen: false)
+                                          .removeTask(tasks[i]);
+                                      Navigator.of(context).pop();
+                                    },
+                                    color: Colors.red,
+                                    title: 'Delete',
+                                  ),
+                                  Button(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      color: Colors.green,
+                                      title: 'Cancel')
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        // onLongPress: () {
+                        //   showBottomSheet(
+                        //     context: context,
+                        //     builder: (_) => Container(),
+                        //   );
+                        // },
+
                         onTap: () {
                           final taskID = tasks[i].id;
                           Navigator.of(context).push(
@@ -39,35 +82,6 @@ class ToDoScreen extends StatelessWidget {
                               builder: (context) => SpecificTaskScreen(taskID),
                             ),
                           );
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (context) {
-                          //     return AlertDialog(
-                          //       title: Text(tasks[i].title),
-                          //       content: Text(tasks[i].description),
-                          //       actions: <Widget>[
-                          //         Button(
-                          //           color: Colors.blue,
-                          //           onPressed: () =>
-                          //               Navigator.of(context).pop(),
-                          //           title: 'Edit',
-                          //         ),
-                          //         Button(
-                          //           color: Colors.red,
-                          //           onPressed: () {
-                          //             Provider.of<TaskProvider>(context,
-                          //                     listen: false)
-                          //                 .removeTask(
-                          //               tasks[i],
-                          //             );
-                          //             Navigator.of(context).pop();
-                          //           },
-                          //           title: 'Delete',
-                          //         ),
-                          //       ],
-                          //     );
-                          //   },
-                          // );
                         },
                       )),
                 ),

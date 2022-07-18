@@ -27,5 +27,4 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- Fix up due date make sure people can see the date they had when editing and put an option to have no date but just a thing to do
-- Optimise the code for adding tasks and make it look a bit prettier
+- Optimise the code for the files (newtask.dart and specifictask.dart) and make it look a bit prettier   
