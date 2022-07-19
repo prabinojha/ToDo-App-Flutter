@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/providers/tasks.dart';
+import 'package:todo/screens/settings.dart';
 import 'package:todo/sub_screens/newtask.dart';
 import 'package:todo/widgets/button.dart';
 import '../sub_screens/specifictask.dart';
@@ -14,6 +15,20 @@ class ToDoScreen extends StatelessWidget {
     final tasks = tasksData.tasks;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.settings),
+            ),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).push(

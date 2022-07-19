@@ -4,6 +4,8 @@ import 'package:todo/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/providers/tasks.dart';
 
+import '../widgets/text_field.dart';
+
 // ignore: must_be_immutable
 class SpecificTaskScreen extends StatefulWidget {
   String taskID;
@@ -56,68 +58,19 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
-                      maxLength: 50,
-                      cursorColor: Colors.grey,
-                      controller: newTitleController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        hintText: specificTask.title,
-                        contentPadding: const EdgeInsets.all(15),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: 2.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: Color.fromRGBO(2, 43, 58, 0.5),
-                            width: 2.0,
-                          ),
-                        ),
-                        fillColor: Colors.grey,
-                        hintStyle: const TextStyle(
-                          color: Color.fromRGBO(2, 43, 58, 0.4),
-                        ),
-                      ),
-                    ),
+                  textField(
+                    newTitleController,
+                    TextInputType.text,
+                    50,
+                    1,
+                    specificTask.title,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
-                      maxLength: 300,
-                      maxLines: 15,
-                      cursorColor: Colors.grey,
-                      controller: newDescriptionController,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        hintText: specificTask.description,
-                        contentPadding: const EdgeInsets.all(15),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: 2.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: Color.fromRGBO(2, 43, 58, 0.5),
-                            width: 2.0,
-                          ),
-                        ),
-                        fillColor: Colors.grey,
-                        hintStyle: const TextStyle(
-                          color: Color.fromRGBO(2, 43, 58, 0.4),
-                        ),
-                      ),
-                    ),
+                  textField(
+                    newDescriptionController,
+                    TextInputType.multiline,
+                    300,
+                    15,
+                    specificTask.description,
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
@@ -163,14 +116,12 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                   Button(
                     color: const Color.fromRGBO(248, 70, 76, 1),
                     onPressed: () {
-                      Provider.of<TaskProvider>(context, listen: false)
-                          .removeTask(specificTask);
                       newTitleController.clear();
                       newDescriptionController.clear();
                       dateInput.clear();
                       Navigator.pop(context);
                     },
-                    title: 'Delete',
+                    title: 'Cancel',
                   ),
                 ],
               ),

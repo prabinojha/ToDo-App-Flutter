@@ -20,17 +20,20 @@ class ToDoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(   
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: const Color.fromRGBO(114, 76, 249, 1),
+        accentColor: const Color.fromRGBO(212, 175, 55, 1),
+      ),
       home: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           bottomNavigationBar: menu(),
           body: const TabBarView(
             children: [
               ToDoScreen(),
               NotesScreen(),
-              SettingsScreen(),
             ],
           ),
         ),
@@ -52,9 +55,6 @@ class ToDoApp extends StatelessWidget {
           ),
           Tab(
             icon: Icon(Icons.notes),
-          ),
-          Tab(
-            icon: Icon(Icons.settings),
           ),
         ],
       ),
