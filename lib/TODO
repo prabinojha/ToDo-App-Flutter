@@ -27,4 +27,5 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- 
+- Connect app to firebase and create authentication page for people to login (use conversate authentication code to make this step faster)
+- Make it so the user is logged in every time they open the app (they don't have to re-login)
