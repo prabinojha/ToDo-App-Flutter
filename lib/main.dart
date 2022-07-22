@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +14,12 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => TaskProvider()),
-        Provider(create: (context) => NotesProvider()),
+        ChangeNotifierProvider(
+          create: (context) => TaskProvider(),
+        ),
+        Provider(
+          create: (context) => NotesProvider(),
+        ),
       ],
       child: const ToDoApp(),
     ),
@@ -34,7 +37,7 @@ class ToDoApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(114, 76, 249, 1),
         accentColor: const Color.fromRGBO(212, 175, 55, 1),
       ),
-      home: SignUp(),
+      home: const SignUp(),
       // DefaultTabController(
       //   length: 2,
       //   child: Scaffold(
@@ -43,7 +46,7 @@ class ToDoApp extends StatelessWidget {
       //       children: [
       //         ToDoScreen(),
       //         NotesScreen(),
-      //       ], 
+      //       ],
       //     ),
       //   ),
       // ),

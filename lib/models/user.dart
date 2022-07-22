@@ -17,7 +17,6 @@ class UserModel {
       uid: map['uid'],
       email: map['email'],
       name: map['name'],
-      isPremium: map['false'],
     );
   }
 
@@ -27,7 +26,6 @@ class UserModel {
       'uid': uid,
       'email': email,
       'name': name,
-      'isPremium': isPremium,
     };
   }
 }

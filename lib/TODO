@@ -18,7 +18,7 @@ Steps
     4. Create the Login page
     5. Create database in which you can login to your separate account
     6. Create the feature where you automatically login after loading your app
-    7. Connect database to the notes section and the todo section to each individual account
+    7. Connect database to the notes section and the todo section to each individual account 
     8. Finally polish up the design to make it actually look good and useable
     9. If you want, you can add a settings page where you customise the look etc.
     10. Add other sections if you want such as notifications for each task. 
@@ -29,5 +29,5 @@ Steps
 NEXT STEP
 - Optimise auth code
 - Make it so the user is logged in every time they open the app (they don't have to re-login)
-- Add tasks to the server based on individual account
-- Use stream builder alongside provider (if possible) to add these tasks and refresh changes automatically
+- Add tasks to the server based on individual account as a new collection on a user
+- Use stream builder alongside provider (if possible) to add these tasks and refresh changes automatically (THIS IS CALLED STREAM PROVIDER)
