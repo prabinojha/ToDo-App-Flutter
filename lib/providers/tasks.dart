@@ -16,26 +16,6 @@ class Task {
     this.isComplete,
   });
 
-  // USE THIS STRUCTURE LATER FOR SENDING DATA TO THE SERVER
-  // // receiving data from the server and mapping into into our own fields
-  // factory UserModel.fromMap(map) {
-  //   return UserModel(
-  //     uid: map['uid'],
-  //     email: map['email'],
-  //     name: map['name'],
-  //     isPremium: map['false'],
-  //   );
-  // }
-
-  // // sending data to our server
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'uid': uid,
-  //     'email': email,
-  //     'name': name,
-  //     'isPremium': isPremium,
-  //   };
-  // }
 }
 
 class TaskProvider extends ChangeNotifier {
