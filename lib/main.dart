@@ -1,12 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/firebase_options.dart';
 import 'package:todo/providers/notes.dart';
 import 'package:todo/providers/tasks.dart';
-import './screens/settings.dart';
 import './screens/notes.dart';
 import './screens/todo.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => TaskProvider()),
