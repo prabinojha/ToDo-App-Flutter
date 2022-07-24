@@ -95,7 +95,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       .catchError(
                     (error) {
                       String errorMessage = error.message;
-                      print(errorMessage);
+                      ErrorWidget(error);
                     },
                   );
                 },
