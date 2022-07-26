@@ -216,7 +216,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
-
+  
   void signUp(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       await _auth
@@ -236,7 +236,7 @@ class _SignUpState extends State<SignUp> {
           )
           .catchError(
         (error) {
-          ErrorWidget(error);
+          print(error);
         },
       );
     }
