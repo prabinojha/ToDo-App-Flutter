@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/providers/tasks.dart';
@@ -16,6 +17,7 @@ class ToDoScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          title: Text(FirebaseAuth.instance.currentUser!.email.toString()),
           actions: [
             IconButton(
               onPressed: () {

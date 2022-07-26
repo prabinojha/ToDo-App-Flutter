@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/authentication_screens/signup.dart';
+import 'package:todo/authentication_screens/verify_email.dart';
 import 'package:todo/firebase_options.dart';
 import 'package:todo/providers/notes.dart';
 import 'package:todo/providers/tasks.dart';
+import 'package:todo/screens/todo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,25 +35,44 @@ class ToDoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color.fromRGBO(114, 76, 249, 1),
-        accentColor: const Color.fromRGBO(212, 175, 55, 1),
-      ),
-      home: const SignUp(),
-      // DefaultTabController(
-      //   length: 2,
-      //   child: Scaffold(
-      //     bottomNavigationBar: menu(),
-      //     body: const TabBarView(
-      //       children: [
-      //         ToDoScreen(),
-      //         NotesScreen(),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: const Color.fromRGBO(114, 76, 249, 1),
+          accentColor: const Color.fromRGBO(212, 175, 55, 1),
+        ), 
+        builder: ((context, child) => Scaffold(
+              body: StreamBuilder<User?>(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return VerifyEmailPage();
+                  } else {
+                    return SignUp();
+                  }
+                },
+              ),
+            )),);
+    // MaterialApp(
+
+    //   debugShowCheckedModeBanner: false,
+    //   theme: ThemeData(
+    //     primaryColor: const Color.fromRGBO(114, 76, 249, 1),
+    //     accentColor: const Color.fromRGBO(212, 175, 55, 1),
+    //   ),
+    //   home: const SignUp(),
+    // DefaultTabController(
+    //   length: 2,
+    //   child: Scaffold(
+    //     bottomNavigationBar: menu(),
+    //     body: const TabBarView(
+    //       children: [
+    //         ToDoScreen(),
+    //         NotesScreen(),
+    //       ],
+    //     ),
+    //   ),
+    // ),
+    // );
   }
 
   Widget menu() {

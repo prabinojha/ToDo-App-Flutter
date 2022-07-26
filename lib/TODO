@@ -27,8 +27,7 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- Confirm on email before they can sign up using that email
-- Make it so the user is logged in every time they open the app (they don't have to re-login)
+- fix up code so that the automatic relogin and verification email works properly and the app is also functional (especially context navigation errors)
 - Add better error handling and displaying for these errors on auth code
 - Add tasks to the server based on individual account as a new collection on a user
 - Use stream builder alongside provider (if possible) to add these tasks and refresh changes automatically (THIS IS CALLED STREAM PROVIDER)

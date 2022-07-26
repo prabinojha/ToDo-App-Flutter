@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/authentication_screens/signin.dart';
+import 'package:todo/authentication_screens/verify_email.dart';
 import 'package:todo/screens/todo.dart';
 
 import '../models/user.dart';
@@ -194,7 +195,7 @@ class _SignUpState extends State<SignUp> {
               color: Theme.of(context).primaryColor,
               title: 'Create Account',
               onPressed: () {
-                signUp(
+                signUp (
                   emailController.text,
                   passwordController.text,
                 );
@@ -229,7 +230,7 @@ class _SignUpState extends State<SignUp> {
               postDetailsToFirestore(),
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => const ToDoScreen(),
+                  builder: (ctx) => VerifyEmailPage(),
                 ),
               ),
             },
