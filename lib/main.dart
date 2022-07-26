@@ -35,23 +35,20 @@ class ToDoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: const Color.fromRGBO(114, 76, 249, 1),
-          accentColor: const Color.fromRGBO(212, 175, 55, 1),
-        ), 
-        builder: ((context, child) => Scaffold(
-              body: StreamBuilder<User?>(
-                stream: FirebaseAuth.instance.authStateChanges(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return VerifyEmailPage();
-                  } else {
-                    return SignUp();
-                  }
-                },
-              ),
-            )),);
+      debugShowCheckedModeBanner: false,
+      builder: ((context, child) => Scaffold(
+            body: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return VerifyEmailPage();
+                } else {
+                  return SignUp();
+                }
+              },
+            ),
+          )),
+    );
     // MaterialApp(
 
     //   debugShowCheckedModeBanner: false,

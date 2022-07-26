@@ -33,9 +33,12 @@ class ToDoScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).push(
+            Navigator.push(
+              context,
               // pushes to a new page where you can add a task
-              MaterialPageRoute(builder: (context) => const NewTaskScreen()),
+              MaterialPageRoute(
+                builder: (context) => const NewTaskScreen(),
+              ),
             );
           },
           child: const Icon(Icons.add),
