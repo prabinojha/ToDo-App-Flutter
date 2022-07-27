@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/authentication_screens/resetPassword.dart';
+import 'package:todo/authentication_screens/signup.dart';
 import 'package:todo/screens/todo.dart';
 
+import '../screens/notes.dart';
 import '../widgets/button.dart';
+import '../widgets/menu.dart';
 
 class SignIn extends StatefulWidget {
   static const routeName = '/sign-in';
@@ -25,27 +28,19 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        highlightElevation: 0,
-        onPressed: () => Navigator.of(context).pop(),
-      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              const Text(
-                'Welcome Back!',
-                style: TextStyle(
-                  color: Color.fromRGBO(2, 43, 58, 1),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  'Welcome Back!',
+                  style: TextStyle(
+                    color: Color.fromRGBO(2, 43, 58, 1),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -185,7 +180,11 @@ class _SignInState extends State<SignIn> {
                 color: Theme.of(context).accentColor,
                 title: 'Sign Up',
                 onPressed: () {
-                  MaterialPageRoute(builder: (context) => const ToDoScreen());
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => SignUp(),
+                    ),
+                  );
                 },
               )
             ],
@@ -204,10 +203,20 @@ class _SignInState extends State<SignIn> {
           )
           .then(
             (uid) => {
-              print('successful'),
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => ToDoScreen(),
+                  builder: (ctx) => DefaultTabController(
+                    length: 2,
+                    child: Scaffold(
+                      bottomNavigationBar: menu(),
+                      body: const TabBarView(
+                        children: [
+                          ToDoScreen(),
+                          NotesScreen(),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             },

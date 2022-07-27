@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/authentication_screens/signin.dart';
+import 'package:todo/authentication_screens/verify_email.dart';
 import 'package:todo/screens/todo.dart';
 
 import '../models/user.dart';
@@ -35,41 +36,17 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        highlightElevation: 0,
-        onPressed: () => Navigator.of(context).pop(),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.all(20),
+              margin: const EdgeInsets.all(40),
               height: 150,
               child: Image.network(
                 'https://cdn.pixabay.com/photo/2019/08/30/15/48/lock-4441691_960_720.png',
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                top: 20,
-                bottom: 5,
-              ),
-              child: Text(
-                'Start your free trial',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
+
             const Text(
               'Create your account!',
               style: TextStyle(
@@ -241,7 +218,11 @@ class _SignUpState extends State<SignUp> {
               color: Theme.of(context).accentColor,
               title: 'I have an account',
               onPressed: () {
-                MaterialPageRoute(builder: (context) => SignIn());
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => SignIn(),
+                  ),
+                );
               },
             )
           ],
@@ -262,7 +243,7 @@ class _SignUpState extends State<SignUp> {
               postDetailsToFirestore(),
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => const ToDoScreen(),
+                  builder: (ctx) => VerifyEmailPage(),
                 ),
               ),
             },
