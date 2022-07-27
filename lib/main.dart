@@ -37,7 +37,7 @@ class ToDoApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(114, 76, 249, 1),
         accentColor: const Color.fromRGBO(212, 175, 55, 1),
       ),
-      home: const SignUp(),
+      home: const SignUp(),        
       // DefaultTabController(
       //   length: 2,
       //   child: Scaffold(
