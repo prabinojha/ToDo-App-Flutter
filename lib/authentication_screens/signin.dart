@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/authentication_screens/resetPassword.dart';
-import 'package:todo/authentication_screens/signup.dart';
 import 'package:todo/screens/todo.dart';
 
 import '../widgets/button.dart';
 
 class SignIn extends StatefulWidget {
+  static const routeName = '/sign-in';
+
   const SignIn({Key? key}) : super(key: key);
 
   @override
@@ -25,17 +26,20 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        highlightElevation: 0,
+        onPressed: () => Navigator.of(context).pop(),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              Container(
-                margin: const EdgeInsets.all(50),
-                height: 200,
-                child: Image.network(
-                  'https://cdn.pixabay.com/photo/2019/08/30/15/48/lock-4441691_960_720.png',
-                ),
-              ),
               const Text(
                 'Welcome Back!',
                 style: TextStyle(
@@ -181,11 +185,7 @@ class _SignInState extends State<SignIn> {
                 color: Theme.of(context).accentColor,
                 title: 'Sign Up',
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const SignUp(),
-                    ),
-                  );
+                  MaterialPageRoute(builder: (context) => const ToDoScreen());
                 },
               )
             ],
@@ -214,7 +214,7 @@ class _SignInState extends State<SignIn> {
           )
           .catchError(
         (error) {
-          ErrorWidget(error);
+          print(error);
         },
       );
     }

@@ -36,14 +36,38 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        highlightElevation: 0,
+        onPressed: () => Navigator.of(context).pop(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.all(50),
-              height: 200,
+              margin: const EdgeInsets.all(20),
+              height: 150,
               child: Image.network(
                 'https://cdn.pixabay.com/photo/2019/08/30/15/48/lock-4441691_960_720.png',
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                top: 20,
+                bottom: 5,
+              ),
+              child: Text(
+                'Start your free trial',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             const Text(
@@ -54,6 +78,18 @@ class _SignUpState extends State<SignUp> {
                 fontSize: 24,
               ),
             ),
+            // InputField(
+            //   hintText: 'Name',
+            //   showPasswordCover: false,
+            // ),
+            // InputField(
+            //   hintText: 'Email',
+            //   showPasswordCover: false,
+            // ),
+            // InputField(
+            //   hintText: 'Password',
+            //   showPasswordCover: true,
+            // ),
             Container(
               margin: const EdgeInsets.all(15),
               child: Form(
@@ -187,12 +223,13 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
+
             const SizedBox(
               height: 15,
             ),
             Button(
               color: Theme.of(context).primaryColor,
-              title: 'Create Account',
+              title: 'Continue',
               onPressed: () {
                 signUp(
                   emailController.text,
@@ -204,11 +241,7 @@ class _SignUpState extends State<SignUp> {
               color: Theme.of(context).accentColor,
               title: 'I have an account',
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const SignIn(),
-                  ),
-                );
+                MaterialPageRoute(builder: (context) => SignIn());
               },
             )
           ],
@@ -236,7 +269,7 @@ class _SignUpState extends State<SignUp> {
           )
           .catchError(
         (error) {
-          ErrorWidget(error);
+          print(error);
         },
       );
     }
