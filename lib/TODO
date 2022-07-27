@@ -27,7 +27,7 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- fix up code so that the automatic relogin and verification email works properly and the app is also functional (especially context navigation errors)
+- Remove one of the 2 Material Apps because that shouldn't be used and rather use another method
 - Add better error handling and displaying for these errors on auth code
 - Add tasks to the server based on individual account as a new collection on a user
 - Use stream builder alongside provider (if possible) to add these tasks and refresh changes automatically (THIS IS CALLED STREAM PROVIDER)

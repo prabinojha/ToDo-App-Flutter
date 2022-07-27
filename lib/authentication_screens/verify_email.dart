@@ -70,14 +70,8 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
 
   @override
   Widget build(BuildContext context) => isEmailVerified
-      ? MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primaryColor: const Color.fromRGBO(114, 76, 249, 1),
-            accentColor: const Color.fromRGBO(212, 175, 55, 1),
-          ),
-          home: ToDoScreen(),
-        )
+      ? ToDoScreen()
+        
       : Scaffold(
           appBar: AppBar(
             title: const Text('Verify Email'),

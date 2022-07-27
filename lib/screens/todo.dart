@@ -44,8 +44,14 @@ class ToDoScreen extends StatelessWidget {
           child: const Icon(Icons.add),
         ),
         body: tasks.isEmpty
-            ? const Center(
-                child: Text('You have no tasks'),
+            ? Center(
+                child: Button(
+                  title: 'sign out',
+                  color: Colors.black,
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                ),
               )
             : ListView.builder(
                 itemCount: tasks.length,

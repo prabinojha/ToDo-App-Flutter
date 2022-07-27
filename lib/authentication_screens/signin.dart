@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/authentication_screens/resetPassword.dart';
 import 'package:todo/authentication_screens/signup.dart';
+import 'package:todo/authentication_screens/verify_email.dart';
 import 'package:todo/screens/todo.dart';
 
 import '../widgets/button.dart';
@@ -214,7 +215,7 @@ class _SignInState extends State<SignIn> {
           )
           .catchError(
         (error) {
-          ErrorWidget(error);
+          print(error.toString());
         },
       );
     }
