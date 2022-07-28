@@ -14,7 +14,6 @@ class NewTaskScreen extends StatefulWidget {
 }
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController newTitleController = TextEditingController();
   final TextEditingController newDescriptionController =
       TextEditingController();
@@ -101,6 +100,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                       ),
                     );
                   } else {
+                    // Adding to the provider (remove this later when server side code is ready)
                     Task newTask = Task(
                       description: newDescriptionController.text,
                       title: newTitleController.text,
@@ -114,6 +114,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     newDescriptionController.clear();
                     dateInput.clear();
                     Navigator.pop(context);
+                    
+                    // Adding to the firestore database on a collection from an individual account (assuming that they are logged in and have email verified)
+                    
                   }
                 },
                 color: const Color.fromRGBO(114, 76, 249, 1),

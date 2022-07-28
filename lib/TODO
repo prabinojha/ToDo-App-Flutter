@@ -27,9 +27,11 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- fix null check error by automatically putting the user in the sign in screen if they are logged out
-
-- Make it so the user is logged in every time they open the app (they don't have to re-login)
-- Make users have to verify their email before signing in
 - Add tasks to the server based on individual account as a new collection on a user
+- Edit and overwrite tasks on database based on individual accounts
 - Use stream builder alongside provider (if possible) to add these tasks and refresh changes automatically (THIS IS CALLED STREAM PROVIDER)
+
+  * Auth Bugs that need to be fixed:
+- fix null check error by automatically putting the user in the sign in screen if they are logged out
+- fix up other verify email bugs
+- Make users have to verify their email before signing in

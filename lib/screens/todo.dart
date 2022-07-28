@@ -18,10 +18,10 @@ class ToDoScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            // FirebaseAuth.instance.currentUser!.emailVerified
-            //     ? FirebaseAuth.instance.currentUser!.email.toString()
-            //     : 'no user',
-            'fix null check error',
+            FirebaseAuth.instance.currentUser!.emailVerified
+                ? FirebaseAuth.instance.currentUser!.email.toString()
+                : 'no user',
+            // 'fix null check error',
           ),
           actions: [
             IconButton(

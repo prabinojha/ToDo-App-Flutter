@@ -70,12 +70,11 @@ class ToDoApp extends StatelessWidget {
                 },
               );
             }
+          } else {
+            return const SignIn();
           }
-          return SignIn();
         },
       ),
     );
   }
-
-  
 }
