@@ -27,9 +27,10 @@ Steps
         another kind of database but offline and local (on your device).
 
 NEXT STEP
-- Add tasks to the server based on individual account as a new collection on a user
-- Edit and overwrite tasks on database based on individual accounts
-- Use stream builder alongside provider (if possible) to add these tasks and refresh changes automatically (THIS IS CALLED STREAM PROVIDER)
+- -------DONE------- add tasks to the server based on individual account as a new collection on a user 
+- Edit, and delete tasks on database based on individual accounts
+- Use stream builder  to see refresh changes automatically 
+- Remove provider code (set it to all based on firebase new changes)
 
   * Auth Bugs that need to be fixed:
 - fix null check error by automatically putting the user in the sign in screen if they are logged out

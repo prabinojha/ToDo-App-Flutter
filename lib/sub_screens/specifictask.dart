@@ -41,9 +41,9 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
     taskInfo = Provider.of<TaskProvider>(context, listen: false);
     specificTask = taskInfo.findById(id);
 
-    newTitleController.text = specificTask.title;
-    newDescriptionController.text = specificTask.description;
-    dateInput.value = TextEditingValue(text: specificTask.duedate);
+    newTitleController.text = specificTask.title.toString();
+    newDescriptionController.text = specificTask.description.toString();
+    dateInput.value = TextEditingValue(text: specificTask.duedate.toString());
 
     return SafeArea(
       child: Scaffold(

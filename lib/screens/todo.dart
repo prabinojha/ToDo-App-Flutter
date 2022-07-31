@@ -53,7 +53,7 @@ class ToDoScreen extends StatelessWidget {
                 itemCount: tasks.length,
                 itemBuilder: (context, i) => Consumer<TaskProvider>(
                   builder: ((context, value, child) => ListTile(
-                        title: Text(tasks[i].title),
+                        title: Text(tasks[i].title.toString()),
                         subtitle: Text(tasks[i].duedate.toString()),
                         trailing: IconButton(
                           icon: const Icon(
@@ -70,6 +70,9 @@ class ToDoScreen extends StatelessWidget {
                                 actions: [
                                   Button(
                                     onPressed: () {
+                                    // Firestore Removing task
+
+                                    // Provider Removing task
                                       tasks[i].isComplete = true;
                                       Provider.of<TaskProvider>(context,
                                               listen: false)
@@ -90,18 +93,11 @@ class ToDoScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        // onLongPress: () {
-                        //   showBottomSheet(
-                        //     context: context,
-                        //     builder: (_) => Container(),
-                        //   );
-                        // },
-
                         onTap: () {
                           final taskID = tasks[i].id;
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => SpecificTaskScreen(taskID),
+                              builder: (context) => SpecificTaskScreen(taskID.toString()),
                             ),
                           );
                         },

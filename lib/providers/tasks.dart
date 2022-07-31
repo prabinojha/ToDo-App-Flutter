@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
 class Task {
-  String title;
-  String description;
-  String duedate;
-  String id;
+  String? title;
+  String? description;
+  String? duedate;
+  String? id;
   bool? isComplete;
 
   Task({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.duedate,
+    this.id,
+    this.title,
+    this.description,
+    this.duedate,
     this.isComplete,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'description': description,
+      'duedate': duedate,
+      'isComplete': isComplete,
+    };
+  }
 }
 
 class TaskProvider extends ChangeNotifier {

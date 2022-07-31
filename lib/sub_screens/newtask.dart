@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -100,6 +102,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                       ),
                     );
                   } else {
+                    // Adding to the firestore database on a collection from an individual account (assuming that they are logged in and have email verified)
+                    addTaskToFirestore();
+
                     // Adding to the provider (remove this later when server side code is ready)
                     Task newTask = Task(
                       description: newDescriptionController.text,
@@ -114,9 +119,6 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     newDescriptionController.clear();
                     dateInput.clear();
                     Navigator.pop(context);
-                    
-                    // Adding to the firestore database on a collection from an individual account (assuming that they are logged in and have email verified)
-                    
                   }
                 },
                 color: const Color.fromRGBO(114, 76, 249, 1),
@@ -137,5 +139,25 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         ),
       ),
     );
+  }
+
+  addTaskToFirestore() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+    User? user = FirebaseAuth.instance.currentUser;
+    Task task = Task();
+
+    task.description = newDescriptionController.value.text;
+    task.title = newTitleController.value.text;
+    task.duedate = dateInput.value.text;
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(user?.uid)
+        .collection('tasks')
+        .doc()
+        .set(
+          task.toMap(),
+        );
   }
 }

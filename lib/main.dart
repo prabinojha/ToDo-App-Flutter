@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/authentication_screens/signin.dart';
-import 'package:todo/authentication_screens/signup.dart';
 import 'package:todo/authentication_screens/verify_email.dart';
 import 'package:todo/firebase_options.dart';
 import 'package:todo/providers/notes.dart';
