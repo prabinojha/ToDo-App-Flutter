@@ -28,8 +28,9 @@ Steps
 
 NEXT STEP
 - -------DONE------- add tasks to the server based on individual account as a new collection on a user 
-- Edit, and delete tasks on database based on individual accounts
-- Use stream builder  to see refresh changes automatically 
+- -------DONE------- Edit, and delete tasks on database based on individual accounts
+- Don't create a task and set its id as its title, instead use a random generated id (and find a way to pass this around in the app when changing values such as editing or deleting)
+- Use stream builder to see refresh changes automatically 
 - Remove provider code (set it to all based on firebase new changes)
 
   * Auth Bugs that need to be fixed:

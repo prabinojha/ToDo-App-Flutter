@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,9 +71,11 @@ class ToDoScreen extends StatelessWidget {
                                 actions: [
                                   Button(
                                     onPressed: () {
-                                    // Firestore Removing task
-
-                                    // Provider Removing task
+                                      // Firestore Removing task (temporary solution for getting the id (set as the title) taken from provider -- change this later)
+                                      removeTaskFromFirestore(
+                                        tasks[i].title,
+                                      );
+                                      // Provider Removing task
                                       tasks[i].isComplete = true;
                                       Provider.of<TaskProvider>(context,
                                               listen: false)
@@ -97,7 +100,8 @@ class ToDoScreen extends StatelessWidget {
                           final taskID = tasks[i].id;
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => SpecificTaskScreen(taskID.toString()),
+                              builder: (context) =>
+                                  SpecificTaskScreen(taskID.toString()),
                             ),
                           );
                         },
@@ -106,5 +110,17 @@ class ToDoScreen extends StatelessWidget {
               ),
       ),
     );
+  }
+
+  removeTaskFromFirestore(taskId) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(user?.uid)
+        .collection('tasks')
+        .doc(taskId)
+        .delete();
   }
 }

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/widgets/button.dart';
@@ -101,7 +103,8 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                   ),
                   const SizedBox(height: 20),
                   Button(
-                      onPressed: () {
+                      onPressed: () async {
+                        // Provider editing/updating the task
                         Provider.of<TaskProvider>(context, listen: false)
                             .updateTask(
                           specificTask.id,
@@ -109,6 +112,9 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
                           newDescriptionController.text,
                           dateInput.text,
                         );
+                        // Firebase editing/updating the task
+                        await editTaskOnFirebase();
+
                         Navigator.of(context).pop();
                       },
                       color: const Color.fromRGBO(114, 76, 249, 1),
@@ -130,5 +136,29 @@ class _SpecificTaskScreenState extends State<SpecificTaskScreen> {
         ),
       ),
     );
+  }
+
+  editTaskOnFirebase() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+    User? user = FirebaseAuth.instance.currentUser;
+    Task task = Task();
+
+    task.description = newDescriptionController.value.text;
+    task.title = newTitleController.value.text;
+    task.duedate = dateInput.value.text;
+
+    String title = newTitleController.value.text;
+
+    await firebaseFirestore
+        .collection('users')
+        .doc(user?.uid)
+        .collection('tasks')
+        .doc(
+          title,
+        ) // change this to something dynamic because different tasks might have the same title
+        .update(
+          task.toMap(),
+        );
   }
 }

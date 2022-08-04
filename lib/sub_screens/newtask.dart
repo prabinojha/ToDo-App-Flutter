@@ -151,11 +151,13 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     task.title = newTitleController.value.text;
     task.duedate = dateInput.value.text;
 
+    String title = newTitleController.value.text;
+
     await firebaseFirestore
         .collection('users')
         .doc(user?.uid)
         .collection('tasks')
-        .doc()
+        .doc(title) // change this to something dynamic because different tasks might have the same title
         .set(
           task.toMap(),
         );
